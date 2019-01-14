@@ -1,0 +1,73 @@
+#include "resource.h"
+
+IDI_MAIN                ICON    DISCARDABLE     "tickle.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDM_MAIN MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Load...\tF3",                ID_FILE_LOAD
+        MENUITEM SEPARATOR
+        MENUITEM "Exit",                        ID_EXIT
+    END
+    POPUP "&Driver"
+    BEGIN
+        MENUITEM "&Restart",                    ID_GAME_RESTART
+        MENUITEM SEPARATOR
+        MENUITEM "&Options...\tF7",             ID_GAME_OPTIONS
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Control Map...",             ID_HELP_CONTROLS
+        MENUITEM SEPARATOR
+        MENUITEM "&About",                      ID_HELP_ABOUT
+    END
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_GAME_LIST DIALOG DISCARDABLE  0, 0, 240, 260
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Load driver..."
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "List",IDC_LISTVIEW,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,0,4,236,232
+    DEFPUSHBUTTON   "OK",IDOK,128,240,52,16
+    PUSHBUTTON      "Cancel",IDCANCEL,184,240,52,16
+END
+
+IDD_GAME_OPTIONS DIALOG DISCARDABLE  0, 0, 212, 185
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_OPTION_LIST,4,4,100,152,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Option values",IDC_OPTION_LABEL,108,4,100,20,
+                    SS_NOPREFIX | WS_BORDER
+    LISTBOX         IDC_OPTION_VALUES,108,28,100,108,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Default",IDC_OPTION_DEFAULT,160,140,48,16
+    DEFPUSHBUTTON   "Close",IDOK,160,164,48,16
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_ACCELERATOR ACCELERATORS DISCARDABLE 
+BEGIN
+    VK_F3,          ID_FILE_LOAD,           VIRTKEY, NOINVERT
+    VK_F7,          ID_GAME_OPTIONS,        VIRTKEY, NOINVERT
+END
